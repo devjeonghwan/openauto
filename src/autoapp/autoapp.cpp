@@ -38,7 +38,7 @@
 #include <f1x/openauto/autoapp/UI/UpdateDialog.hpp>
 #include <f1x/openauto/Common/Log.hpp>
 
-namespace aasdk = f1x::aasdk;
+namespace aasdk = aasdk;
 namespace autoapp = f1x::openauto::autoapp;
 using ThreadPool = std::vector<std::thread>;
 

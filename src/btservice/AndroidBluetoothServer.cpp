@@ -61,7 +61,7 @@ namespace f1x {
 //                    connect(socket, &QBluetoothSocket::disconnected, this,
 //                            QOverload<>::of(&ChatServer::clientDisconnected));
 
-                    f1x::aasdk::proto::messages::WifiInfoRequest request;
+                    aasdk::proto::messages::WifiInfoRequest request;
                     request.set_ip_address(getIP4_("wlan0"));
                     request.set_port(5000);
 
@@ -121,11 +121,11 @@ namespace f1x {
             }
 
             void AndroidBluetoothServer::handleWifiInfoRequest(QByteArray &buffer, uint16_t length) {
-                f1x::aasdk::proto::messages::WifiInfoRequest msg;
+                aasdk::proto::messages::WifiInfoRequest msg;
                 msg.ParseFromArray(buffer.data() + 4, length);
                 OPENAUTO_LOG(info) << "WifiInfoRequest: " << msg.DebugString();
 
-                f1x::aasdk::proto::messages::WifiInfoResponse response;
+                aasdk::proto::messages::WifiInfoResponse response;
                 response.set_ip_address(getIP4_("wlan0"));
                 response.set_port(5000);
                 response.set_status(aasdk::proto::messages::WifiInfoResponse_Status_STATUS_SUCCESS);
@@ -134,7 +134,7 @@ namespace f1x {
             }
 
             void AndroidBluetoothServer::handleWifiSecurityRequest(QByteArray &buffer, uint16_t length) {
-                f1x::aasdk::proto::messages::WifiSecurityReponse response;
+                aasdk::proto::messages::WifiSecurityReponse response;
 
                 response.set_ssid(configuration_->getParamFromFile("/etc/hostapd/hostapd.conf","ssid").toStdString());
                 response.set_bssid(QNetworkInterface::interfaceFromName("wlan0").hardwareAddress().toStdString());
@@ -170,7 +170,7 @@ namespace f1x {
             }
 
             void AndroidBluetoothServer::handleWifiInfoRequestResponse(QByteArray &buffer, uint16_t length) {
-                f1x::aasdk::proto::messages::WifiInfoResponse msg;
+                aasdk::proto::messages::WifiInfoResponse msg;
                 msg.ParseFromArray(buffer.data() + 4, length);
                 OPENAUTO_LOG(info) << "WifiInfoResponse: " << msg.DebugString();
             }
